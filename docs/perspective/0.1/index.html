@@ -235,15 +235,25 @@ diaries in general!</p>
 (namely it uses <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime.fromisoformat" title="(in Python v3.15)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">datetime.datetime.fromisoformat()</span></code></a> and
 other new Python things I can’t remember).
 To install, run the following commands in your terminal:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://git.rapidcow.org/perspective.git
-<span class="c1"># perspective is no longer on github - but it *is* on codeberg!</span>
-git<span class="w"> </span>clone<span class="w"> </span>https://codeberg.org/rapidcow/perspective.git
-python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>perspective/src
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://git.rapidcow.org/pub/project/perspective.git
+
+<span class="c1"># *or*....</span>
+<span class="c1"># but since perspective is no longer on codeberg due to</span>
+<span class="c1"># recent concerns with AI-assisted projects.  lib psp isn't</span>
+<span class="c1"># *yet* "vibe-coded" but it may be soon due to the limited</span>
+<span class="c1"># interest and energy i've had this thing i've struggled to</span>
+<span class="c1"># build on for 3 years.  anyways you can use gitlab :v</span>
+
+git<span class="w"> </span>clone<span class="w"> </span>https://gitlab.com/rapidcow/perspective.git
+
+<span class="c1"># Then:</span>
+
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>./perspective/src
 </pre></div>
 </div>
 <p>or one-liners:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://git.rapidcow.org/perspective.git@v0.1#subdirectory<span class="o">=</span>src
-python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://codeberg.org/rapidcow/perspective.git@v0.1#subdirectory<span class="o">=</span>src
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://git.rapidcow.org/pub/project/perspective.git@v0.1#subdirectory<span class="o">=</span>src
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://gitlab.com/rapidcow/perspective.git@v0.1#subdirectory<span class="o">=</span>src
 </pre></div>
 </div>
 <p>Remember to replace <code class="docutils literal notranslate"><span class="pre">python3</span></code> with the name of your Python 3 interpreter!
