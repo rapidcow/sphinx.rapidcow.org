@@ -1,0 +1,1584 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="The psp Package" href="../psp/index.html" /><link rel="prev" title="Contributing" href="../contrib.html" />
+
+    <meta name="generator" content="sphinx-5.0.0, furo 2022.06.21"/>
+        <title>The basicproc Module - The Perspective Journal documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/stylesheet.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">The Perspective Journal  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">The Perspective Journal  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/about.html">What is this?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/howto.html">How to back up entries from Perspective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cookbook.html">Perspective Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/extensions.html">Extension Tutorial</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../changelog/index.html">Changelog</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog/0.1.html">Release 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">basicproc</span></code> Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../psp/index.html">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">psp</span></code> Package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../psp/types.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.types</span></code> — Important objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/serializers/json.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.serializers.json</span></code> — JSON backup file processors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/stringify.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.stringify</span></code> — Format panels and entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/cli.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.cli</span></code> — Command-line interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/filetypes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.filetypes</span></code> — Defining file types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/timeutil.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.timeutil</span></code> — Time utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/util.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.util</span></code> — Miscellaneous functions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../psp/ext/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext</span></code> — Extensions that may or may not be so useful to everyone</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../psp/ext/bigentry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext.bigentry</span></code> — Blog-style entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psp/ext/captions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext.captions</span></code> — Entries with captions and stuff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psp/ext/metadata.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext.metadata</span></code> — Entries with metadata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../struct/index.html">Data Structure</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../struct/backup_spec.html"><code class="docutils literal notranslate"><span class="pre">backup.json</span></code> Specification</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-basicproc">
+<span id="the-basicproc-module"></span><span id="basicproc"></span><h1>The <a class="reference internal" href="#module-basicproc" title="basicproc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">basicproc</span></code></a> Module<a class="headerlink" href="#module-basicproc" title="Permalink to this heading">#</a></h1>
+<p>(Formerly <code class="docutils literal notranslate"><span class="pre">0.md</span></code>, titled <em>Backup File and Processing</em>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rapidcow</p>
+</dd>
+<dt class="field-even">Date<span class="colon">:</span></dt>
+<dd class="field-even"><p>June 21, 2021</p>
+</dd>
+<dt class="field-odd">Source<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://gist.github.com/rapidcow/a0490a57965061ae06e5c43b2c97e46c">basicproc.py</a></p>
+</dd>
+</dl>
+<section id="abstract">
+<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this heading">#</a></h2>
+<p>In this document, I will introduce the backup scheme for the app Perspective,
+as well as the program that does basic processing of the backup file of the
+backup file and prints out the entries to the terminal.</p>
+<p>At the beginning I tried to make this a progressive documentation, starting
+with the motivation and then slowly working up to the algorithm and code.
+Skip to <a class="reference internal" href="#the-program">The Program</a> to get a more technical documentation.</p>
+</section>
+<section id="inspection">
+<h2>Inspection<a class="headerlink" href="#inspection" title="Permalink to this heading">#</a></h2>
+<figure class="align-default" id="fig-1">
+<a class="reference internal image-reference" href="../_images/fig1.png"><img alt="../_images/fig1.png" src="../_images/fig1.png" style="height: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figure 1 </span><span class="caption-text">Demonstration of the interface of Perspective.</span><a class="headerlink" href="#fig-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To begin with, let’s start by looking at the user interface of Perspective
+so that we know what we’re dealing with.  I chose this day because it has
+alost all types of information we need to store.  First, we have the text
+“Tuesday, September 4, 2018” at the top [Note from future me: I totally
+misread it which is why I used <code class="docutils literal notranslate"><span class="pre">%B</span></code> instead of <code class="docutils literal notranslate"><span class="pre">%b</span></code> in my code… just to
+tell you I didn’t mean to do that!  If you came from the <a class="reference internal" href="../psp/index.html#module-psp" title="psp: Bundle of weird stuff for backing up diaries"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp</span></code></a> library
+please read <a class="reference internal" href="../tutorials/cookbook.html#pspcb-0"><span class="std std-ref">this</span></a> on how to fix this issue].  This page
+contains <em>entries</em> such as the one with the time “4:21 AM” and
+“Sep 7  1:00 AM”.  And for terminology sake,
+we’ll call this page a <em>panel</em>.  A panel is perhaps better thought of as a
+forum where entries with relevant topics ares posted.</p>
+<p>There are two types of entries, “main” entries and insight entries; the name
+“main” is an unofficial name I gave to the entries that are not insight
+entries.  Insight entries are distinguished from main entries in a way that
+they are inserted much later than the date of the panel: specifically, 2
+days after the panel’s date.  We use a boolean <code class="docutils literal notranslate"><span class="pre">&quot;insight&quot;</span></code> to keep track
+of this, which is true for an insight entry and false for a main entry.</p>
+<p>(Note: There is a way to insert main entries even after  2 days, and that is
+by tapping the lock icon so that it becomes unlocked.  So, in conclusion,
+while it is impossible to insert insight entries within 2 days after the
+panel’s date, both insight entries and main entries can appear after that.)</p>
+<p>An entry can also hold two types of data: text and image.  Each entry holds
+precisely one of them.  All of the entries seen in <a class="reference internal" href="#fig-1"><span class="std std-numref">Figure 1</span></a> hold
+plain text.  Interestingly, in the current implementation, these two types
+are treated equally as a stream of bytes, or just binary data.  Text being
+special kind of binary data, as it comes with an encoding.</p>
+<p>There is also something to be noted here.  Take the entry written at 23:11,
+for example.  It has a special line of blue text and gray paragraph
+following it. I don’t know what they are called, but they are just like
+mindful questions asked by the app, and the gray text is what I responded
+with.</p>
+<p>In summary, these are the most essential things we have to deal with:
+(things after the colon are the attributes contained within)</p>
+<ul class="simple">
+<li><p>panel: date</p></li>
+<li><p>entries: date and time, text or image data, main or insight</p></li>
+<li><p>question</p></li>
+</ul>
+</section>
+<section id="backup-file-structure">
+<h2>Backup File Structure<a class="headerlink" href="#backup-file-structure" title="Permalink to this heading">#</a></h2>
+<section id="basic-structure">
+<h3>Basic Structure<a class="headerlink" href="#basic-structure" title="Permalink to this heading">#</a></h3>
+<p>Our backup file starts with a top-level object, containing convenient global
+attributes like the time zone.  By the way, what I mean by an <em>attribute</em> is
+simply a key-value pair (in Python terminology).  For example in the current
+file, the time zone is specified as</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+08:00"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>which means that the time zone attribute <code class="docutils literal notranslate"><span class="pre">&quot;tz&quot;</span></code> holds a value of
+<code class="docutils literal notranslate"><span class="pre">&quot;+08:00&quot;</span></code>, or 8 hours ahead of UTC (that’s the standard time in China
+here!).  The JSON file would therefore look like</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+08:00"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"..."</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and inside the list identified by the key <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> is what we will store
+the <em>panels</em>.  (The <code class="docutils literal notranslate"><span class="pre">&quot;...&quot;</span></code> is simply a placeholder for the panels, not
+literally a string of ellipsis.)  Each panel is uniquely identified by a
+date, and so in this JSON file, we use ISO format to store the date.
+A panel for <a class="reference internal" href="#fig-1"><span class="std std-numref">Figure 1</span></a> would therefore look like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"..."</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where inside the key <code class="docutils literal notranslate"><span class="pre">entries</span></code> we store the entries.  Of course, some
+panels may have no entries at all, which means that we should treat
+<code class="docutils literal notranslate"><span class="pre">entries</span></code> as an optional attribute for a panel.  Altogether, we have</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+08:00"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">     </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04"</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">       </span><span class="s2">"..."</span>
+<span class="w">     </span><span class="p">]</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="entry-data-and-inheritance">
+<h3>Entry Data and Inheritance<a class="headerlink" href="#entry-data-and-inheritance" title="Permalink to this heading">#</a></h3>
+<p>Next we need to decide how we can store data for the entries.
+To do this we need to make out a trickier move.  Let’s take the first entry
+in <a class="reference internal" href="#fig-1"><span class="std std-numref">Figure 1</span></a> for example.  Considering the information we need
+includes the date, the time, and the text itself, we need at least three
+attributes:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:21"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found this app today!"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is meant to be placed in the list of <code class="docutils literal notranslate"><span class="pre">&quot;entries&quot;</span></code> in the code block
+above (marked with <code class="docutils literal notranslate"><span class="pre">&quot;...&quot;</span></code>), which as a whole would look like</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+08:00"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">     </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04"</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">       </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04"</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:21"</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found this app today!"</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">     </span><span class="p">]</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that I translated the 12-hour format into 24-hour format.  This is also
+a part of the ISO standard and is easier to parse.  But in this way typing
+the date can get cumbersome.  Well this is ultimately inevitable, but what
+we can do is to inherit the date information from the panel if it is not
+provided.  So in this case, this entry was posted on the same day as the
+panel, and hence we can let the program <em>infer</em> the <code class="docutils literal notranslate"><span class="pre">&quot;date&quot;</span></code> from the
+panel.  The “simplified” data would therefore be</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:21"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found this app today!"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In addition, in cases we DO need to specify date and time at the same time,
+we propose a convenient “attribute” <code class="docutils literal notranslate"><span class="pre">date-time</span></code> that does this for us.
+As an example, the date and time should be specified as</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">"date-time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04 04:21"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Date and time may be separated by a space character or the character (code)
+<code class="docutils literal notranslate"><span class="pre">'T'</span></code>.  This is equivalent to the second code block above.</p>
+<p>Oh, and forgot to mention, time zone is automatically inherited as well.</p>
+<p>You may put it at the very top (like in the example above) or inside a panel:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+08:00"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"..."</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This can be helpful if you want to change time zone temporarily for one panel
+locally.  You can also put one directly inside an entry like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:21"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+08:00"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found this app today!"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and the time zone will only apply to this entry.</p>
+</section>
+<section id="insight-and-question">
+<h3>Insight and Question<a class="headerlink" href="#insight-and-question" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">&quot;insight&quot;</span></code> is a boolean attribute that is used to distinguish <em>main</em>
+and <em>insight</em> entries.  (Remember that the insight entries are the ones that
+are blue and added much later than the main ones.)  Since they are <code class="docutils literal notranslate"><span class="pre">False</span></code>
+by default, you will have to add it explicitly for an insight entry:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"date-time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-07 01:00"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"insight"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What a day!"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The question on the other hand is specified by a JSON string under the key
+<code class="docutils literal notranslate"><span class="pre">&quot;question&quot;</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23:11"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do you feel you've smiled enough today?"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nope, and why smiling? That’s kind of weird."</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="data-model-and-images">
+<h3>Data Model and Images<a class="headerlink" href="#data-model-and-images" title="Permalink to this heading">#</a></h3>
+<p>As we discussed earlier, text and image data are treated equally in our
+program.  Data with text is quite straightforward, as the JSON file itself is
+text encoded in UTF-8 (as in examples above).  Data with images, i.e. binary files are a bit trickier.  Since bytes cannot be directly typed into a
+plain text document, an encoding like base 64 or base 85 has to
+be used in order to represent bytes as ASCII characters.  In order to perform
+one of these ASCII-to-binary decoding process on the <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> attribute, we
+propose the <code class="docutils literal notranslate"><span class="pre">&quot;data-encoding&quot;</span></code> attribute, and can be used as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:00"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"utf-8"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data-encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base64"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SGVsbG8hICBBbmQgdGhpcyBpcyBhbiBleGFtcGxl"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is equivalent to</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:00"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello!  And this is an example"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&quot;encoding&quot;</span></code> here is necessary because normally we expect a binary
+stream of data here.  The process by which the program loads the data, though,
+is a little bit funny.  We already know Python loads <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> as a UTF-8
+string, so what the program does is as follows:</p>
+<ul class="simple">
+<li><p>The program notices that <code class="docutils literal notranslate"><span class="pre">&quot;data-encoding&quot;</span></code> is in the entry, and so the
+<code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> is encoded using <code class="docutils literal notranslate"><span class="pre">str.encode</span></code> into <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object with
+encoding <code class="docutils literal notranslate"><span class="pre">ascii</span></code>.  (In other words, the <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> is interpreted as an
+ASCII string and encoded, meaning that you cannot use any non-ASCII
+string.)</p></li>
+<li><p>The program then calls <code class="docutils literal notranslate"><span class="pre">base64.b64decode</span></code> from standard library to
+decode the ASCII characters into a stream of data.</p></li>
+<li><p>Seeing the <code class="docutils literal notranslate"><span class="pre">&quot;encoding&quot;</span></code> was specified and is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, the program
+infers this stream of data to be text.</p></li>
+</ul>
+<p>Of course, how the program keeps track of what is “text” and what is “binary”
+is exactly whether an encoding was provided (unless the data comes directly
+from the file without <code class="docutils literal notranslate"><span class="pre">&quot;data-encoding&quot;</span></code>, in which case <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> is assumed
+to be the encoding).</p>
+<figure class="align-default" id="fig-2">
+<a class="reference internal image-reference" href="../_images/fig2.jpg"><img alt="../_images/fig2.jpg" src="../_images/fig2.jpg" style="height: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figure 2 </span><span class="caption-text">A Perspective panel with image.</span><a class="headerlink" href="#fig-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now coming back to the main problem: how do we store images?  Well, an image,
+after all, is just a stream of bytes with special structure (and a special
+extension), so all we have to do is store them inside <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> and then,
+similar to how an extension work, we will tell the program about the
+<code class="docutils literal notranslate"><span class="pre">&quot;type&quot;</span></code> of the data.  So if we were to, say, store the image entry in
+<a class="reference internal" href="#fig-2"><span class="std std-numref">Figure 2</span></a>, it should look something like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-11"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:16"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jpeg"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"data-encoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base64"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/9j/4AAQSkZJRgABAQAASABIAAD/  (goes on and on...)"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>But since these images are typically big, and… you know, these things are
+typically kept in a file, we propose yet another way to include binary data
+that are present as a file!  Like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:16"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jpeg"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"path/to/file.jpg"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And now we can just toss <code class="docutils literal notranslate"><span class="pre">&quot;data-encoding&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> out of the
+window…!  In this case, since there’s no leading slash, this will be a
+relative path to where the program is run.  Of course, sometimes you can even
+leave out the <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;</span></code>, and just let the program infer it from the extension,
+but, uh… it’s good to know that you can be explicit like this.</p>
+</section>
+<section id="metadata">
+<h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h3>
+<p>Oh, and one last thing before we go!  This is mainly due to that, as files
+don’t tend to preserve their creation date when we move them around, and the
+metadata is basically lost when we use the <code class="docutils literal notranslate"><span class="pre">&quot;data-encoding&quot;</span></code> to store files,
+we propose one last thing to store: metadata.</p>
+<p>For now, it’s very simple.  All you have to do is specify <cite>meta</cite> as a
+dictionary (JSON object) like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:16"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-11_2018-09-12_05-25.jpg"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-11 17:58"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are no specifications yet as I don’t have anything particular about
+what I want to do with this in mind yet… but you should know that the times
+specified here are in ISO format and <em>complete</em> (like this one)!  Time zone can
+be omitted though, cuz that would be way too tedious.</p>
+</section>
+</section>
+<section id="the-program">
+<h2>The Program<a class="headerlink" href="#the-program" title="Permalink to this heading">#</a></h2>
+<p>An excerpt of the backup file we’re dealing with (save it as
+<code class="docutils literal notranslate"><span class="pre">backup_test.json</span></code>!):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"Backup for my Perspective entries!"</span><span class="p">,</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+08:00"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"img"</span><span class="p">,</span><span class="w"> </span><span class="s2">"img_original"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">   </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-04"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:21"</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found this app today!"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-05"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">":|"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22:20"</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-05_22-20.jpg"</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-05 17:41"</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are two parts that I haven’t introduced yet (which I apologize &gt;w&lt;
+but because they are quite unimportant to the whole scheme I delayed them
+until now):</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&quot;paths&quot;</span></code> attribute.  These are the directories that the program
+will try to prepend to an <code class="docutils literal notranslate"><span class="pre">&quot;input&quot;</span></code> path to find a file.  The program
+will first search in the current working directory, by the way.  (A
+warning will be generated for ambiguous cases where a file is found in
+multiple directories.)</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&quot;rating&quot;</span></code> attribute in entries.  This is the smiley face, bland
+face and the frowning face that appears on the top-right corner!  (See
+either <a class="reference internal" href="#fig-1"><span class="std std-numref">Figure 1</span></a> or <a class="reference internal" href="#fig-2"><span class="std std-numref">Figure 2</span></a> for reference.)</p></li>
+</ul>
+<section id="top-level-data-extraction">
+<h3>Top-Level Data Extraction<a class="headerlink" href="#top-level-data-extraction" title="Permalink to this heading">#</a></h3>
+<p>Now the rough idea is that we use two classes: <a class="reference internal" href="#basicproc.Panel" title="basicproc.Panel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></a> and
+<a class="reference internal" href="#basicproc.Entry" title="basicproc.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a>, both responsible of the panel and entry data.  Before that,
+however, we still have to deal with the outermost layer of configurations,
+like <code class="docutils literal notranslate"><span class="pre">&quot;tz&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;path&quot;</span></code>.</p>
+<p>To be clear, this is how we would load a backup file:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'backup.json'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>  <span class="c1"># encoding is utf-8 by default</span>
+   <span class="n">bk</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>I call this <code class="docutils literal notranslate"><span class="pre">bk</span></code> the backup dictionary (although you might be screaming
+<code class="docutils literal notranslate"><span class="pre">bu</span></code> at me… if so then sorry, but this is what I decided…)</p>
+<p>Now there are several things needed to be extracted from the backup file…
+for one we need to extract the description, which is a list of strings to be
+joined by <code class="docutils literal notranslate"><span class="pre">''.join()</span></code>.  This is done by the module-level function
+<code class="xref py py-func docutils literal notranslate"><span class="pre">backup_get_description()</span></code>.  On the other hand, if we want to get the
+data itself (which we recall as simply a list of panels), then
+<code class="xref py py-func docutils literal notranslate"><span class="pre">backup_get_data()</span></code> is called.  Finally, the way we pass these important
+attributes (like <code class="docutils literal notranslate"><span class="pre">&quot;path&quot;</span></code>) onto the <a class="reference internal" href="#basicproc.Panel" title="basicproc.Panel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></a> object is by extracting
+them from <code class="docutils literal notranslate"><span class="pre">backup_get_attributes</span></code> function.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">backup_get_description</span><span class="p">(</span><span class="n">bk</span><span class="p">)</span>  <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="k">pass</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">backup_get_data</span><span class="p">(</span><span class="n">bk</span><span class="p">)</span>         <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span> <span class="k">pass</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">backup_get_attributes</span><span class="p">(</span><span class="n">bk</span><span class="p">)</span>   <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span> <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Next we need <code class="xref py py-func docutils literal notranslate"><span class="pre">data_get_by_date()</span></code> to extract a specific panel by date.
+It should check for duplicates.  If one only wants to check for duplicates,
+then <code class="xref py py-func docutils literal notranslate"><span class="pre">data_check_duplicates()</span></code> does this job.  It also returns a <code class="docutils literal notranslate"><span class="pre">set</span></code>
+containing all unique dates as <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> objects for debugging
+purposes.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Raises ValueError</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">data_check_duplicates</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span> <span class="k">pass</span>
+<span class="c1"># Raises LookupError or ValueError</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">data_get_by_date</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">duplicates_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="rough-idea">
+<h3>Rough Idea<a class="headerlink" href="#rough-idea" title="Permalink to this heading">#</a></h3>
+<p>So what are we trying to do here?  Well let’s fire up an interactive session
+to show you what I want to do here.  If you have the script now, what you
+may do is run</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>to follow along.  First, we want to load the backup file.  After you load
+the file you’ll see it has some keys:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'backup_test.json'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">bk</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bk</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">dict_keys(['desc', 'tz', 'paths', 'data'])</span>
+</pre></div>
+</div>
+<p>The functions we mentioned above extract the dictionary in multiple ways
+by their keys.  I wrote what keys they extract in the comments.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Extract 'desc'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">backup_get_description</span><span class="p">(</span><span class="n">bk</span><span class="p">)</span>
+<span class="go">'Backup for my Perspective entries!'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Extract everything aside from 'desc' and 'data'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="n">backup_get_attributes</span><span class="p">(</span><span class="n">bk</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">dict_keys(['tz', 'paths'])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Extract 'data'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">backup_get_data</span><span class="p">(</span><span class="n">bk</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">[{'date': '2018-09-04',</span>
+<span class="go">  'entries': [{'data': 'Found this app today!', 'time': '04:21'}],</span>
+<span class="go">  'rating': ':('},</span>
+<span class="go"> {'date': '2018-09-05',</span>
+<span class="go">  'entries': [{'input': '2018-09-05_22-20.jpg',</span>
+<span class="go">               'meta': {'created': '2018-09-05 17:41'},</span>
+<span class="go">               'time': '22:20'}],</span>
+<span class="go">  'rating': ':|'}]</span>
+</pre></div>
+</div>
+<p>We would like to load a panel, let’s say.  This can be done by using the
+class <a class="reference internal" href="#basicproc.Panel" title="basicproc.Panel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></a>.  Its constructor parses the fields as well as preparing a
+printer for us to use, which is why we pass the keyword argument <code class="docutils literal notranslate"><span class="pre">width</span></code> to
+it.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">panel_dict</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">panel</span> <span class="o">=</span> <span class="n">Panel</span><span class="p">(</span><span class="n">panel_dict</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">panel</span>
+<span class="go">&lt;Panel object on Tue Sep  4 2018 (+08:00)&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">panel</span><span class="o">.</span><span class="n">date</span>
+<span class="go">datetime.date(2018, 9, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">panel</span><span class="o">.</span><span class="n">entries</span>
+<span class="go">[&lt;Entry object at Tue Sep  4 04:21 2018 (UTC+08:00)&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">panel</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'rating'</span><span class="p">]</span>
+<span class="go">':('</span>
+</pre></div>
+</div>
+<p>We can access the fields belonging to the entries too:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span> <span class="o">=</span> <span class="n">panel</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span>
+<span class="go">&lt;Entry object at Tue Sep  4 04:21 2018 (UTC+08:00)&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span><span class="o">.</span><span class="n">date_time</span>
+<span class="go">datetime.datetime(2018, 9, 4, 4, 21, tzinfo=datetime.timezone(datetime.timedelta(seconds=28800)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="go">{'caption': None,</span>
+<span class="go"> 'encoding': 'utf-8',</span>
+<span class="go"> 'format': None,</span>
+<span class="go"> 'raw': b'Found this app today!',</span>
+<span class="go"> 'type': 'plain'}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span><span class="o">.</span><span class="n">insight</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span><span class="o">.</span><span class="n">attrs</span>
+<span class="go">{'question': None}</span>
+</pre></div>
+</div>
+<p>You would almost never need to construct an <a class="reference internal" href="#basicproc.Entry" title="basicproc.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a> class yourself, since
+they would be automatically parsed by the <a class="reference internal" href="#basicproc.Panel" title="basicproc.Panel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></a>.  But anyway, to construct
+an <a class="reference internal" href="#basicproc.Entry" title="basicproc.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a> object, you’ll need the parent panel and a dictionary of an
+entry.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entry_dict</span> <span class="o">=</span> <span class="n">panel_dict</span><span class="p">[</span><span class="s1">'entries'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry_dict</span>
+<span class="go">{'time': '04:21', 'data': 'Found this app today!'}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">entry_dict</span><span class="p">,</span> <span class="n">panel</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span>
+<span class="go">&lt;Entry object at Tue Sep  4 04:21 2018 (UTC+08:00)&gt;</span>
+</pre></div>
+</div>
+<p>(This new <code class="docutils literal notranslate"><span class="pre">entry</span></code> object functions in the exact same way as
+<code class="docutils literal notranslate"><span class="pre">panel.entries[0]</span></code> does, so there’s no need for us to reassign <code class="docutils literal notranslate"><span class="pre">entry</span></code>.)</p>
+<p>Now here’s the really cool part: you can call the <code class="docutils literal notranslate"><span class="pre">to_string()</span></code> method to
+format the panel!</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'='</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'='</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">============================================================</span>
+<span class="go">               Tuesday, September 4, 2018  :(</span>
+
+<span class="go">4:21 AM</span>
+<span class="go">  Found this app today!</span>
+<span class="go">============================================================</span>
+</pre></div>
+</div>
+<p>You can see that the title is centered within the text frame of width 60,
+and that is because we passed <code class="docutils literal notranslate"><span class="pre">width=60</span></code> to the constructor of
+<a class="reference internal" href="#basicproc.Panel" title="basicproc.Panel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></a> previously.  Of course, you can change this up by accessing
+the <code class="docutils literal notranslate"><span class="pre">width</span></code> attribute, although the result can look weird if you decide to
+try out small values…</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">panel</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'='</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'='</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">==========</span>
+<span class="go"> Tuesday,</span>
+<span class="go">September</span>
+<span class="go"> 4, 2018</span>
+<span class="go">    :(</span>
+
+<span class="go">4:21 AM</span>
+<span class="go">  Found</span>
+<span class="go">  this app</span>
+<span class="go">  today!</span>
+<span class="go">==========</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Entry</span></code> objects also have a <code class="docutils literal notranslate"><span class="pre">to_string()</span></code> method (which is called by
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Panel.to_string()</span></code> to format string for a single entry):</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'='</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'='</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">==========</span>
+<span class="go">4:21 AM</span>
+<span class="go">  Found</span>
+<span class="go">  this app</span>
+<span class="go">  today!</span>
+<span class="go">==========</span>
+</pre></div>
+</div>
+<p>Anyhow, hopefully you got a good understanding of what these classes
+primarily do: they both take the raw dictionary from the JSON file as
+arguments, and store the information within themselves.  The <code class="docutils literal notranslate"><span class="pre">to_string</span></code>
+methods format the panel and entry and can be printed out as shown above.</p>
+</section>
+<section id="the-panel-class">
+<h3>The <code class="docutils literal notranslate"><span class="pre">Panel</span></code> Class<a class="headerlink" href="#the-panel-class" title="Permalink to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="basicproc.Panel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">basicproc.</span></span><span class="sig-name descname"><span class="pre">Panel</span></span><a class="headerlink" href="#basicproc.Panel" title="Permalink to this definition">#</a></dt>
+<dd><p>The main job of <a class="reference internal" href="#basicproc.Panel" title="basicproc.Panel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></a> is to hold the following attributes:</p>
+<ul class="simple">
+<li><p>The date</p></li>
+<li><p>The entries: a list of objects representing the entries</p></li>
+<li><p>The rating: an optional string like <code class="docutils literal notranslate"><span class="pre">':)'</span></code> and <code class="docutils literal notranslate"><span class="pre">':('</span></code></p></li>
+</ul>
+<p>In addition to that, we also want to keep track of the lookup paths when
+we encounter an <code class="docutils literal notranslate"><span class="pre">&quot;input&quot;</span></code> field.  For the purpose of printing, we also need
+to know what text wrapper (an object that wraps text to a certain width)
+we’re using, as well as the level of indentation.</p>
+<p>The date and entries are stored in the attributes <code class="docutils literal notranslate"><span class="pre">date</span></code> and <code class="docutils literal notranslate"><span class="pre">entries</span></code> of
+the class respectively, however <code class="docutils literal notranslate"><span class="pre">rating</span></code> is stored in the dict <code class="docutils literal notranslate"><span class="pre">attrs</span></code>. <a class="footnote-reference brackets" href="#id5" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>
+Weirdly enough, the time zone string <code class="docutils literal notranslate"><span class="pre">tz</span></code> is also stored in <code class="docutils literal notranslate"><span class="pre">attrs</span></code>.</p>
+<p>The list of lookup paths is stored in <code class="docutils literal notranslate"><span class="pre">paths</span></code>.  The width of text is
+internally stored in <code class="docutils literal notranslate"><span class="pre">_width</span></code>, which will be accessed through a descriptor
+later on.  The wrapper and the level of indentation are stored in
+<code class="docutils literal notranslate"><span class="pre">_wrapper</span></code> and <code class="docutils literal notranslate"><span class="pre">_indent</span></code> respectively.</p>
+<p>Here’s the entire code for the initialization:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Panel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Panel containing entries for a single day.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    panel : dict</span>
+<span class="sd">        A dict loaded from a JSON object of the panel.  In `backup.json`</span>
+<span class="sd">        this is any of the objects within the "data" key.</span>
+
+<span class="sd">        This can be extracted from a backup dict using `backup_get_data`.</span>
+
+<span class="sd">    attrs : dict</span>
+<span class="sd">        Extracted by `backup_get_attributes`, this contains information that</span>
+<span class="sd">        acts as global options in `backup.json`.</span>
+
+<span class="sd">    width : int, default 80</span>
+<span class="sd">        Maximum length of lines for the printed text.</span>
+<span class="sd">        Since this works by calling `textwrap.TextWrapper`, this</span>
+<span class="sd">        breaks if trying to format a paragraph with a word longer than</span>
+<span class="sd">        this integer.</span>
+<span class="sd">    """</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">'date'</span><span class="p">,</span> <span class="s1">'entries'</span><span class="p">,</span> <span class="s1">'_width'</span><span class="p">,</span> <span class="s1">'_wrapper'</span><span class="p">,</span>
+        <span class="s1">'_indent'</span><span class="p">,</span> <span class="s1">'paths'</span><span class="p">,</span> <span class="s1">'attrs'</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">panel</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+        <span class="c1"># Default values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">tz</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rating</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'.'</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_indent</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wrapper</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">TextWrapper</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">(</span><span class="n">panel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We see that <code class="docutils literal notranslate"><span class="pre">attrs</span></code> is processed by the <code class="docutils literal notranslate"><span class="pre">_set</span></code> method and <code class="docutils literal notranslate"><span class="pre">panel</span></code> is
+processed by the <code class="docutils literal notranslate"><span class="pre">_process</span></code> method.  The <code class="docutils literal notranslate"><span class="pre">_set</span></code> method sets the attributes
+if they exist, and the attributes include the time zone <cite>tz</cite> and the lookup
+paths <cite>paths</cite>.  It is called before <code class="docutils literal notranslate"><span class="pre">_process(panel)</span></code> so that attributes in
+<cite>panel</cite> can override the attributes in <code class="docutils literal notranslate"><span class="pre">attrs</span></code>.  The following lines setting
+<code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">_indent</span></code>, and <code class="docutils literal notranslate"><span class="pre">_wrapper</span></code> don’t affect anything set by <code class="docutils literal notranslate"><span class="pre">_set</span></code>.</p>
+<p>Any key aside from <code class="docutils literal notranslate"><span class="pre">tz</span></code> and <code class="docutils literal notranslate"><span class="pre">paths</span></code> will cause an
+<code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidEntryError</span></code> to be raised.  Something like this:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Panel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Panel</span><span class="p">({},</span> <span class="p">{</span><span class="s1">'extra'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'keys'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'paths'</span><span class="p">:</span> <span class="p">[]})</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">  </span><span class="c">...</span>
+<span class="gr">basicproc.InvalidEntryError</span>: <span class="n">unrecognized keys: 'extra', 'keys'</span>
+</pre></div>
+</div>
+<p>Next is the <code class="docutils literal notranslate"><span class="pre">_process</span></code> method call.  It only requires one attribute: the
+<code class="docutils literal notranslate"><span class="pre">date</span></code>.  It also takes in some optional attributes:</p>
+<dl>
+<dt>paths</dt><dd><p>Lookup paths, identical to that in <cite>attrs</cite>.  Required to be a list of
+<code class="docutils literal notranslate"><span class="pre">str</span></code> if provided.  Will be used to update <code class="docutils literal notranslate"><span class="pre">self.paths</span></code> in a way these
+paths are looked up first. <a class="footnote-reference brackets" href="#id6" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+</dd>
+<dt>tz</dt><dd><p>Time zone, identical to that in <code class="docutils literal notranslate"><span class="pre">attrs</span></code>.  Will be set in
+<code class="docutils literal notranslate"><span class="pre">self.attrs['tz']</span></code>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">tz</span></code> has a rather strict syntax, namely due to that the class method
+<code class="docutils literal notranslate"><span class="pre">datetime.datetime.fromisoformat</span></code> is used for parsing.  If we denote the
+string holding the value as <code class="docutils literal notranslate"><span class="pre">tz</span></code>, and the <code class="docutils literal notranslate"><span class="pre">fromisoformat</span></code> method as
+<code class="docutils literal notranslate"><span class="pre">f</span></code>, then <code class="docutils literal notranslate"><span class="pre">tz</span></code> is valid only when <code class="docutils literal notranslate"><span class="pre">f('0001-01-01T00:00'</span> <span class="pre">+</span> <span class="pre">tz)</span></code>
+doesn’t raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+</dd>
+<dt>rating</dt><dd><p>The rating of the day.  Will be set in <code class="docutils literal notranslate"><span class="pre">self.attrs['rating']</span></code> and
+defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt>entries</dt><dd><p>List of <code class="docutils literal notranslate"><span class="pre">dict</span></code>.  If we store each <code class="docutils literal notranslate"><span class="pre">dict</span></code> in a variable named <code class="docutils literal notranslate"><span class="pre">entry</span></code>,
+then <code class="docutils literal notranslate"><span class="pre">Entry(entry,</span> <span class="pre">self)</span></code> is created and is appended to the list
+<code class="docutils literal notranslate"><span class="pre">self.entries</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="the-entry-class">
+<h3>The <code class="docutils literal notranslate"><span class="pre">Entry</span></code> Class<a class="headerlink" href="#the-entry-class" title="Permalink to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="basicproc.Entry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">basicproc.</span></span><span class="sig-name descname"><span class="pre">Entry</span></span><a class="headerlink" href="#basicproc.Entry" title="Permalink to this definition">#</a></dt>
+<dd><p>An <a class="reference internal" href="#basicproc.Entry" title="basicproc.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a> holds a lot of things:</p>
+<ul class="simple">
+<li><p>The date and time (plus time zone)</p></li>
+<li><p>The parent panel—the panel it belongs to</p></li>
+<li><p>A boolean for whether or not it is an insight</p></li>
+<li><p>The data (like the text or image)</p></li>
+<li><p>The metadata (like the creation time of a photo)</p></li>
+</ul>
+<p>In addition to that, it holds the following attribute optionally:</p>
+<ul class="simple">
+<li><p>Question (see <a class="reference internal" href="#insight-and-question">Insight and Question</a> if you don’t know what that is)</p></li>
+</ul>
+<p>(Yeah.  I know that’s just one but I still listed it just to be consistent.)</p>
+<p>In addition, we need the variables for the wrapper and indent just like the
+case for <a class="reference internal" href="#basicproc.Panel" title="basicproc.Panel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code></a>, but instead of creating our own <code class="docutils literal notranslate"><span class="pre">_wrapper</span></code> and
+<code class="docutils literal notranslate"><span class="pre">_indent</span></code>, we’re going to inherit them from <a class="reference internal" href="#basicproc.Entry" title="basicproc.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a>.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Entry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""An entry belonging to a panel.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    entry : dict</span>
+<span class="sd">        A dict loaded from a JSON object of the entry.  In</span>
+<span class="sd">        `backup.json` this is any of the objects in the "entries"</span>
+<span class="sd">        key of a panel.</span>
+
+<span class="sd">    panel : Panel object</span>
+<span class="sd">        The panel that the entry to be created belongs to.</span>
+
+<span class="sd">    load_file : bool, default False</span>
+<span class="sd">        Whether to load file that are specified "input" into memory.</span>
+
+<span class="sd">    strict : bool, default True</span>
+<span class="sd">        Whether to validate the entry at the end of initialization.</span>
+<span class="sd">    """</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">'date_time'</span><span class="p">,</span> <span class="s1">'panel'</span><span class="p">,</span> <span class="s1">'_wrapper'</span><span class="p">,</span> <span class="s1">'_indent'</span><span class="p">,</span> <span class="s1">'insight'</span><span class="p">,</span>
+        <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'attrs'</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">,</span> <span class="n">panel</span><span class="p">,</span> <span class="n">load_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">panel</span> <span class="o">=</span> <span class="n">panel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">insight</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Default values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wrapper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">panel</span><span class="o">.</span><span class="n">_wrapper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">load_file</span><span class="o">=</span><span class="n">load_file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">strict</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Again we’re going to talk about what <code class="docutils literal notranslate"><span class="pre">_process</span></code> does here.  The required
+fields however aren’t just simply one but one of two keys.  They are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> or <code class="docutils literal notranslate"><span class="pre">date-time</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> or <code class="docutils literal notranslate"><span class="pre">input</span></code></p></li>
+</ul>
+<p>For example, if you look at the first entry, you will see that only
+<cite>time</cite> and <cite>data</cite> are provided:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04:21"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found this app today!"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here’s a brief description of all the possible keys you can pick.  Starting
+from time-related keys:</p>
+<dl class="simple">
+<dt>time</dt><dd><p>Time in ISO format.  This when joined with the <code class="docutils literal notranslate"><span class="pre">date</span></code> value using
+<code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">+</span> <span class="pre">'T'</span> <span class="pre">+</span> <span class="pre">time</span> <span class="pre">+</span> <span class="pre">tz</span></code>, where <code class="docutils literal notranslate"><span class="pre">tz</span></code> is the time zone, must be valid
+when passed to <code class="docutils literal notranslate"><span class="pre">datetime.datetime.fromisoformat</span></code>.  Can contain time zone
+offset; see more at description of <code class="docutils literal notranslate"><span class="pre">date-time</span></code>.</p>
+</dd>
+<dt>date</dt><dd><p>Date in ISO format.  See description of <cite>time</cite> for when this is valid.
+Defaults to <code class="docutils literal notranslate"><span class="pre">panel.date.isoformat()</span></code> where <code class="docutils literal notranslate"><span class="pre">panel</span></code> is the second
+argument in <code class="docutils literal notranslate"><span class="pre">__init__</span></code> (aside from <code class="docutils literal notranslate"><span class="pre">self</span></code>).</p>
+</dd>
+<dt>date-time</dt><dd><p>Date time in ISO format.  Must be a valid string when passed to
+<code class="docutils literal notranslate"><span class="pre">datetime.datetime.fromisoformat</span></code>.  Can contain time zone
+offset which will be preserved as opposed to inheriting from</p>
+</dd>
+</dl>
+<p>Then we have data and input.  These are the primary ways to store data as we
+discussed in <a class="reference internal" href="#data-model-and-images">Data Model and Images</a>.</p>
+<dl>
+<dt>data</dt><dd><p>The text data verbatim.  Or, if <code class="docutils literal notranslate"><span class="pre">data-encoding</span></code> is specified, the
+encoded ASCII string verbatim.  May be a string or a list of strings.</p>
+</dd>
+<dt>input</dt><dd><p>The path of the file containing the data.  The program will first seek
+the path in the current working directory (<code class="docutils literal notranslate"><span class="pre">os.getcwd()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">basicproc.BASE_DIR</span></code> which you can modify for more control) and then
+<code class="docutils literal notranslate"><span class="pre">paths</span></code> if you specified them, treating all of them as relative paths to
+<code class="docutils literal notranslate"><span class="pre">BASE_DIR</span></code>.</p>
+<p>Side note: <code class="docutils literal notranslate"><span class="pre">paths</span></code> specified in the current panel are sought first, and
+then <code class="docutils literal notranslate"><span class="pre">paths</span></code> specified at the top level are sought second.</p>
+</dd>
+<dt>data-encoding</dt><dd><p>A string that is either one of the strings in the “Name” column of the
+following table.</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Function called</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;base16&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base64.b16decode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;base32&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base64.b32decode</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;base64&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base64.b64decode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;base85&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base64.b85decode</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;ascii85&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base64.a85decode</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+<p>Next is the type and encoding fields.  It’s worth noting that although these
+field are optional, they are automatically inferred from other information
+provided.  See <a class="reference internal" href="#inference-rules">Inference Rules</a> for the algorithm.</p>
+<dl>
+<dt>type</dt><dd><p>A string that describes the type of the data.  Default types are
+<code class="docutils literal notranslate"><span class="pre">&quot;plain&quot;</span></code> for text data and <code class="docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code> for binary data.</p>
+<p>There are text types such as <code class="docutils literal notranslate"><span class="pre">markdown</span></code> and binary types such as
+<code class="docutils literal notranslate"><span class="pre">jpeg</span></code> and <code class="docutils literal notranslate"><span class="pre">png</span></code>.</p>
+<p>If this is not provided, then it defaults to <code class="docutils literal notranslate"><span class="pre">&quot;plain&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code>
+based on how the data is provided.</p>
+</dd>
+<dt>encoding</dt><dd><p>A string that is either <code class="docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code> or an encoding supported by the Python
+module <code class="docutils literal notranslate"><span class="pre">codec</span></code>.  If this is not provided, then it defaults to <cite>“utf-8”</cite>
+or <code class="docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code> based on how the data is provided.</p>
+</dd>
+</dl>
+<p>Here are some rules on how <cite>type</cite> and <cite>encoding</cite> are inferred, if they’re not
+provided:</p>
+<ul>
+<li><p>If data is given by the key <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> without <code class="docutils literal notranslate"><span class="pre">&quot;data-encoding&quot;</span></code>,
+then by default, <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">&quot;plain&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">encoding</span> <span class="pre">=</span> <span class="pre">&quot;utf-8&quot;</span></code>.</p>
+<ul>
+<li><p>Actually <code class="docutils literal notranslate"><span class="pre">encoding</span> <span class="pre">=</span> <span class="pre">&quot;utf-8&quot;</span></code> is not a default, but rather a strict
+requirement.  This is because strings in Python 3 are UTF-8 strings
+internally, and so it would only make sense if the encoding is
+UTF-8 too to reflect that.</p>
+<p>Providing an encoding other than <code class="docutils literal notranslate"><span class="pre">&quot;utf-8&quot;</span></code> will cause the program to
+issue a <code class="docutils literal notranslate"><span class="pre">logging.WARNING</span></code> level of log and the encoding is treated as
+<code class="docutils literal notranslate"><span class="pre">&quot;utf-8&quot;</span></code>.</p>
+</li>
+</ul>
+</li>
+<li><p>If data is given by the key <code class="docutils literal notranslate"><span class="pre">&quot;input&quot;</span></code> or by keys <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> and
+<cite>“data-encoding”</cite> together, then by default (when neither <code class="docutils literal notranslate"><span class="pre">type</span></code> or
+<cite>encoding</cite> is provided) <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">&quot;binary&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">encoding</span> <span class="pre">=</span> <span class="pre">&quot;binary&quot;</span></code>.</p>
+<ul>
+<li><p>This gets a little more complicated when the input path has an
+extension we can extract with <code class="docutils literal notranslate"><span class="pre">os.path.splitext</span></code>.  Of course, the main
+motivation for this inference is that we don’t want to provide the
+same kind of information twice.  When we input from a file with a
+<code class="docutils literal notranslate"><span class="pre">.jpg</span></code> or <code class="docutils literal notranslate"><span class="pre">.jpeg</span></code> extension, we know that it is a JPEG file and so we
+shouldn’t need to write <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;jpeg&quot;</span></code> again.</p>
+<p>When the file has extension and the program can <em>infer</em> the type
+from it, then <code class="docutils literal notranslate"><span class="pre">type</span></code> is set to that inferred type, and <cite>encoding</cite>
+is either set to <code class="docutils literal notranslate"><span class="pre">&quot;utf-8&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;binary&quot;</span></code>, depending on whether the
+inferred type is of text or binary type.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Some more optional fields:</p>
+<dl class="simple">
+<dt>format</dt><dd><p>The format of the data, typically accompanied by <code class="docutils literal notranslate"><span class="pre">type</span></code>.  For example,
+when we have a <code class="docutils literal notranslate"><span class="pre">type</span></code> of <code class="docutils literal notranslate"><span class="pre">&quot;markdown&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">format</span></code> of <code class="docutils literal notranslate"><span class="pre">&quot;pandoc&quot;</span></code>,
+then we’re saying that the Markdown file should be interpreted with
+<a class="reference external" href="https://pandoc.org/">pandoc</a>’s default format.</p>
+</dd>
+</dl>
+<dl>
+<dt>type-format</dt><dd><p>Shorthand for providing <cite>type</cite> and <cite>format</cite>.
+<code class="docutils literal notranslate"><span class="pre">&quot;type-format&quot;:</span> <span class="pre">&quot;TYPE_STRING-FORMAT_STRING&quot;</span></code> is equivalent to
+<code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;TYPE_STRING&quot;,</span> <span class="pre">&quot;format&quot;:</span> <span class="pre">&quot;FORMAT_STRING&quot;</span></code>, where the hyphen
+character <cite>-</cite> separates the two.</p>
+</dd>
+<dt>caption</dt><dd><p>Short caption/alt text for the data.  Can be a string or a list of
+strings.  Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt>question</dt><dd><p>A string of a question preceding the block of text written by the user.
+Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>See <a class="reference internal" href="#insight-and-question">Insight and Question</a> for reference.</p>
+</dd>
+<dt>insight</dt><dd><p>A boolean indicating whether this entry is an insight (see
+<a class="reference internal" href="#insight-and-question">Insight and Question</a> too for reference).  Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>meta</dt><dd><p>Metadata.  Currently this can be any <code class="docutils literal notranslate"><span class="pre">dict</span></code> with no restriction
+whatsoever, but the following attributes specifically will be parsed:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">created</span></code>: Creation time of a file as a string.  For a photo, this
+would also be the time it was taken at.  Should be a valid string when
+passed to <code class="docutils literal notranslate"><span class="pre">datetime.datetime.fromisoformat</span></code>, and if the result is a
+naive time object, replaces <code class="docutils literal notranslate"><span class="pre">tzinfo</span></code> with that of <code class="docutils literal notranslate"><span class="pre">self.date_time</span></code>.</p>
+<p>Defaults to <cite>None</cite>, which means that the creation date is unknown
+or this piece of information doesn’t make sense here.</p>
+<p>This time should be no later than the time provided through
+the <code class="docutils literal notranslate"><span class="pre">date-time</span></code>/<code class="docutils literal notranslate"><span class="pre">time</span></code> field, otherwise an <code class="docutils literal notranslate"><span class="pre">InvalidEntryError</span></code>
+exception is raised.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">posted</span></code>: Time that this entry was posted at as a string.  Note
+that this is reserved specifically to the time that is displayed on
+the Perspective app.  This key is useful when the entry was posted
+much much later than when it was actually written (e.g. when I
+wasn’t with my phone and could only write on my notebook or type on my
+laptop).</p>
+<p>Format requirements is similar to that of <code class="docutils literal notranslate"><span class="pre">created</span></code>.</p>
+<p>This time should be no earlier than the time provided through
+the <code class="docutils literal notranslate"><span class="pre">date-time</span></code>/<code class="docutils literal notranslate"><span class="pre">time</span></code> field, otherwise an <code class="docutils literal notranslate"><span class="pre">InvalidEntryError</span></code>
+exception is raised.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desc</span></code>: Description.  This key is provided very commonly but
+surprisingly there’s no validation???  <code class="docutils literal notranslate"><span class="pre">None</span></code> by default.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="inference-rules">
+<span id="basicproc-inference"></span><h3>Inference Rules<a class="headerlink" href="#inference-rules" title="Permalink to this heading">#</a></h3>
+<p>Inferences we are going to talk about are <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">encoding</span></code>.  When
+they’re left out, their values are automatically set based on how the data
+are provided and the extension of a file, if input from the <code class="docutils literal notranslate"><span class="pre">&quot;input&quot;</span></code> key.</p>
+<p>But first, I want to be clear what I mean by “infer,” because as fancy as it
+sounds… it’s nothing more than just a simple lookup like finding a value
+in a <cite>dict</cite> with a key.  The following are all possible inferences:</p>
+<ol class="arabic simple">
+<li><p>From type (like <code class="docutils literal notranslate"><span class="pre">plain</span></code> and <code class="docutils literal notranslate"><span class="pre">markdown</span></code>), to encoding (like <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>
+and <code class="docutils literal notranslate"><span class="pre">binary</span></code>).</p></li>
+<li><p>From encoding, to type.</p></li>
+<li><p>From extension (like <code class="docutils literal notranslate"><span class="pre">.jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">.txt</span></code>), to type.</p></li>
+</ol>
+<p>Oh, and in addition, types can have aliases!  Like for example, you can write
+<code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;jpeg&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;jpg&quot;</span></code>, and they’ll all be converted to
+<code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;jpeg&quot;</span></code>. <a class="footnote-reference brackets" href="#id7" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
+<p>For the first inference: the inference from type to encoding, it is made
+possible by keeping track of types that are known to be text, which is
+stored under the name <code class="docutils literal notranslate"><span class="pre">TEXT_TYPES</span></code> as a set of strings: <a class="footnote-reference brackets" href="#id8" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">basicproc</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basicproc</span><span class="o">.</span><span class="n">TEXT_TYPES</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Therefore the inference works something like this:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="n">TEXT_TYPES</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">infer_encoding_from_type</span><span class="p">(</span><span class="n">type_</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">TEXT_TYPES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'utf-8'</span>
+    <span class="c1"># Function has already returned; no need for "else: ..."</span>
+    <span class="k">return</span> <span class="s1">'binary'</span>
+</pre></div>
+</div>
+<p>And as a few examples, if you define the above function and fire up an
+interactive prompt:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span> <span class="o">=</span> <span class="n">infer_encoding_from_type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span><span class="p">(</span><span class="s1">'plain'</span><span class="p">)</span>
+<span class="go">'utf-8'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span><span class="p">(</span><span class="s1">'binary'</span><span class="p">)</span>
+<span class="go">'binary'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span><span class="p">(</span><span class="s1">'markdown'</span><span class="p">)</span>
+<span class="go">'utf-8'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span><span class="p">(</span><span class="s1">'spaghetti'</span><span class="p">)</span>
+<span class="go">'binary'</span>
+</pre></div>
+</div>
+<p>Now for the second kind of inference: inference from encoding to type.  It’s
+even simpler actually, since any encoding other than <code class="docutils literal notranslate"><span class="pre">binary</span></code> always implies
+some sort of text format, which would make the type <code class="docutils literal notranslate"><span class="pre">plain</span></code>, by default.  An
+implementation would therefore look like this:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">infer_type_from_encoding</span><span class="p">(</span><span class="n">encoding</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">encoding</span> <span class="o">==</span> <span class="s1">'binary'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'binary'</span>
+    <span class="k">return</span> <span class="s1">'plain'</span>
+</pre></div>
+</div>
+<p>Finally the third inference: inference from file extension to type.
+In the program extensions like <code class="docutils literal notranslate"><span class="pre">.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code> are registered at the
+beginning of the program.  They can be looked up using <code class="docutils literal notranslate"><span class="pre">TYPE_EXTENSIONS</span></code>
+dictionary:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_EXTENSIONS</span> <span class="k">as</span> <span class="n">ext_to_type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ext_to_type</span><span class="p">[</span><span class="s1">'.jpg'</span><span class="p">]</span>
+<span class="go">'jpeg'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ext_to_type</span><span class="p">[</span><span class="s1">'.jpeg'</span><span class="p">]</span>
+<span class="go">'jpeg'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ext_to_type</span><span class="p">[</span><span class="s1">'.txt'</span><span class="p">]</span>
+<span class="go">'plain'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ext_to_type</span><span class="p">[</span><span class="s1">'.crazyname'</span><span class="p">]</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">  </span><span class="c">...</span>
+<span class="gr">KeyError</span>: <span class="n">'.crazyname'</span>
+</pre></div>
+</div>
+<p>The algorithm for the inference looks like this:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_EXTENSIONS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">splitext</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">infer_type_from_input_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">TYPE_EXTENSIONS</span><span class="p">[</span><span class="n">ext</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>One problem in this code (though not likely to occur) is that extensions like
+<code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> will be impossible to detect.  Thankfully that’s possible with the
+new <code class="docutils literal notranslate"><span class="pre">psp</span></code> module!  (Get excited for that too!  Or not… i don’t care…)</p>
+<p>Examples:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span> <span class="o">=</span> <span class="n">infer_type_from_input_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span><span class="p">(</span><span class="s1">'some/dir/dog.png'</span><span class="p">)</span>
+<span class="go">'png'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infer</span><span class="p">(</span><span class="s1">'some/dir/cat.jpg'</span><span class="p">)</span>
+<span class="go">'jpeg'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">type_</span> <span class="o">=</span> <span class="n">infer</span><span class="p">(</span><span class="s1">'some/dir/horses_go.meow'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">type_</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Now with the three kinds of inferences in mind, we can finally talk about how
+the program infers types!  (The word INFER in all-caps refers to one of the
+inferences we discussed above)</p>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> without <code class="docutils literal notranslate"><span class="pre">data-encoding</span></code></p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">encoding</span></code> is provided, issue a warning if it’s not <code class="docutils literal notranslate"><span class="pre">'utf-8'</span></code>.
+Treat encoding as <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> in any way.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">type</span></code> is provided, store it as is.  Otherwise <code class="docutils literal notranslate"><span class="pre">type</span></code> is INFERRED
+from <code class="docutils literal notranslate"><span class="pre">encoding</span></code> (which is always going to be <code class="docutils literal notranslate"><span class="pre">'plain'</span></code> since
+<code class="docutils literal notranslate"><span class="pre">encoding</span></code> is always <code class="docutils literal notranslate"><span class="pre">'utf-8'</span></code>).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code></p>
+<ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">type</span></code> is provided, store it as is.  Otherwise INFER <code class="docutils literal notranslate"><span class="pre">type</span></code> from
+the extension, defaulting to <code class="docutils literal notranslate"><span class="pre">None</span></code>/unset.  (As seen in the function
+above, this default process is returning a <code class="docutils literal notranslate"><span class="pre">None</span></code>.)</p>
+<p>(The code implements this with <code class="docutils literal notranslate"><span class="pre">_infer_type_from_input</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">self.data['type']</span></code> is remained unchanged as <code class="docutils literal notranslate"><span class="pre">None</span></code> by simply
+<code class="docutils literal notranslate"><span class="pre">return</span></code>ing.  Just wanted to point that out since the code is very
+poorly written…)</p>
+<ul class="simple">
+<li><p>At this point, if <code class="docutils literal notranslate"><span class="pre">type</span></code> is still unset, it is INFERRED from
+<code class="docutils literal notranslate"><span class="pre">encoding</span></code> by default.</p></li>
+</ul>
+</li>
+<li><p>Now that the type is guaranteed to be set, INFER <code class="docutils literal notranslate"><span class="pre">encoding</span></code> from
+<code class="docutils literal notranslate"><span class="pre">type</span></code> if <code class="docutils literal notranslate"><span class="pre">encoding</span></code> is unset.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> with <code class="docutils literal notranslate"><span class="pre">data-encoding</span></code></p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">type</span></code> is provided, store it as is.  Otherwise INFER <code class="docutils literal notranslate"><span class="pre">type</span></code> from
+<code class="docutils literal notranslate"><span class="pre">encoding</span></code> if it is set, defaulting to <code class="docutils literal notranslate"><span class="pre">'binary'</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">encoding</span></code> is provided, store it as is.  Otherwise INFER <code class="docutils literal notranslate"><span class="pre">encoding</span></code>
+from <code class="docutils literal notranslate"><span class="pre">type</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+<p>By saying “defaulting to” after an inference I mean the case when the
+inference fails.  For inferring from an extension, it would be finding no
+extension at all or not able to identify the extension (like in the case of
+<code class="docutils literal notranslate"><span class="pre">some.crazyname</span></code>).  For inferring from a type or encoding, it would be the
+case of finding the type or encoding unset.  For the case of type, the type
+may also be unregistered, causing the lookup to fail.</p>
+<p>Now here’s a Python-like pseudo code that intuitively explains what the
+algorithm does.  Here we assume that <code class="docutils literal notranslate"><span class="pre">entry</span></code> is a dictionary of the entry:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">enc</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"encoding"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="s2">"data"</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">"data-encoding"</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+        <span class="n">data_enc</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"data-encoding"</span><span class="p">]</span>
+        <span class="n">ascii_data</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"data"</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"ascii"</span><span class="p">)</span>
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">decode</span> <span class="n">ascii_data</span> <span class="k">with</span> <span class="n">data_enc</span>
+
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">infer</span> <span class="nb">type</span> <span class="kn">from</span><span class="w"> </span><span class="nn">encoding</span> <span class="p">(</span><span class="n">default</span> <span class="s2">"binary"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">enc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">infer</span> <span class="n">encoding</span> <span class="kn">from</span><span class="w"> </span><span class="nn">type</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"data"</span><span class="p">]</span>
+        <span class="n">enc</span> <span class="o">=</span> <span class="s2">"utf-8"</span>
+
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">type</span> <span class="o">=</span> <span class="s2">"plain"</span>
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># "input" in entry</span>
+    <span class="n">input_path</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"input"</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">infer</span> <span class="nb">type</span> <span class="kn">from</span><span class="w"> </span><span class="nn">extension</span> <span class="n">of</span> <span class="n">input_path</span> <span class="p">(</span><span class="n">default</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">infer</span> <span class="nb">type</span> <span class="kn">from</span><span class="w"> </span><span class="nn">encoding</span> <span class="p">(</span><span class="n">default</span> <span class="s2">"binary"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">enc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">infer</span> <span class="n">encoding</span> <span class="kn">from</span><span class="w"> </span><span class="nn">type</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="fun-stuff">
+<h2>Fun Stuff<a class="headerlink" href="#fun-stuff" title="Permalink to this heading">#</a></h2>
+<p>Some fun little mini-programs to show what we can do with this!</p>
+<section id="who-s-the-longest-diary">
+<h3>Who’s the longest diary?<a class="headerlink" href="#who-s-the-longest-diary" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard library</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Our own stuff</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">backup_get_attributes</span><span class="p">,</span> <span class="n">backup_get_data</span><span class="p">,</span>
+    <span class="n">data_get_by_date</span><span class="p">,</span> <span class="n">Panel</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_check_duplicates</span>
+
+
+<span class="n">columns</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'backup.json'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">backup</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+
+<span class="n">attrs</span> <span class="o">=</span> <span class="n">backup_get_attributes</span><span class="p">(</span><span class="n">backup</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">backup_get_data</span><span class="p">(</span><span class="n">backup</span><span class="p">)</span>
+
+<span class="n">max_ents</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">max_words</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="k">for</span> <span class="n">pan</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">panel</span> <span class="o">=</span> <span class="n">Panel</span><span class="p">(</span><span class="n">pan</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">panel</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ent</span><span class="o">.</span><span class="n">is_binary</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_words</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">N</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">words</span> <span class="o">&gt;</span> <span class="n">max_words</span><span class="p">[</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">max_words</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">max_ents</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="n">max_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">max_ents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ent</span><span class="p">)</span>
+        <span class="n">max_ents</span><span class="p">,</span> <span class="n">max_words</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">sorted</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="n">max_ents</span><span class="p">,</span> <span class="n">max_words</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">))]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'TOP </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1"> LONGEST ENTRIES'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+    <span class="n">ent</span> <span class="o">=</span> <span class="n">max_ents</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">wc</span> <span class="o">=</span> <span class="n">max_words</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'NUMBER </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'='</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">ent</span><span class="o">.</span><span class="n">insight</span><span class="p">:</span>
+        <span class="n">ic</span> <span class="o">=</span> <span class="s1">' (insight)'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ic</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">ent</span><span class="o">.</span><span class="n">panel</span><span class="o">.</span><span class="n">date</span><span class="si">:</span><span class="s1">%a %b %e, %Y</span><span class="si">}{</span><span class="n">ic</span><span class="si">}</span><span class="s1">, scoring </span><span class="si">{</span><span class="n">wc</span><span class="si">}</span><span class="s1"> words!'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>updated version (only the for loop part):</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+    <span class="n">ent</span> <span class="o">=</span> <span class="n">max_ents</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">wc</span> <span class="o">=</span> <span class="n">max_words</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'NUMBER </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: scoring </span><span class="si">{</span><span class="n">wc</span><span class="si">}</span><span class="s1"> words!'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-'</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">label_insight</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">long_format</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>this is due to a new keyword argument <code class="docutils literal notranslate"><span class="pre">label_insight</span></code> we introduced to
+<code class="docutils literal notranslate"><span class="pre">Entry.to_string</span></code>!  (And also long format which always prints the full date)</p>
+</section>
+<section id="extract-entries-written-on-the-same-days">
+<h3>Extract entries written on the same days<a class="headerlink" href="#extract-entries-written-on-the-same-days" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard library</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Our own stuff</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">backup_get_attributes</span><span class="p">,</span> <span class="n">backup_get_data</span><span class="p">,</span>
+    <span class="n">data_get_by_date</span><span class="p">,</span> <span class="n">Panel</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">basicproc</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_check_duplicates</span>
+
+
+<span class="n">columns</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'backup.json'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">backup</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+
+<span class="n">attrs</span> <span class="o">=</span> <span class="n">backup_get_attributes</span><span class="p">(</span><span class="n">backup</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">backup_get_data</span><span class="p">(</span><span class="n">backup</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">criteria</span><span class="p">(</span><span class="n">entry</span><span class="p">):</span>
+    <span class="n">lo</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="s1">'2019-01-01'</span><span class="p">)</span>
+    <span class="n">hi</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="s1">'2019-01-20'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">entry</span><span class="o">.</span><span class="n">date_time</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">hi</span>
+        <span class="ow">and</span> <span class="n">entry</span><span class="o">.</span><span class="n">insight</span><span class="p">)</span>        <span class="c1"># use this if you only want insights</span>
+
+
+<span class="n">ents</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">pan</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">panel</span> <span class="o">=</span> <span class="n">Panel</span><span class="p">(</span><span class="n">pan</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">panel</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">criteria</span><span class="p">(</span><span class="n">ent</span><span class="p">):</span>
+            <span class="n">ents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ent</span><span class="p">)</span>
+
+<span class="n">ents</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">date_time</span><span class="p">)</span>
+<span class="n">last_date</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">ents</span><span class="p">:</span>
+    <span class="n">this_date</span> <span class="o">=</span> <span class="n">ent</span><span class="o">.</span><span class="n">panel</span><span class="o">.</span><span class="n">date</span>
+    <span class="k">if</span> <span class="n">this_date</span> <span class="o">!=</span> <span class="n">last_date</span><span class="p">:</span>
+        <span class="n">last_date</span> <span class="o">=</span> <span class="n">this_date</span>
+        <span class="n">date_str</span> <span class="o">=</span> <span class="n">this_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'</span><span class="si">%a</span><span class="s1">, %B </span><span class="si">%e</span><span class="s1">, %Y'</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">date_str</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'-'</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">date_str</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">label_insight</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>This is because I don’t consider it to be a very important property
+of the object and therefore storing it under a general name <code class="docutils literal notranslate"><span class="pre">attrs</span></code>
+won’t force me to allocate more slots in the future.</p>
+</aside>
+<aside class="footnote brackets" id="id6" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Technically uses <code class="docutils literal notranslate"><span class="pre">self.paths</span> <span class="pre">=</span> <span class="pre">paths</span> <span class="pre">+</span> <span class="pre">self.paths</span></code> where <code class="docutils literal notranslate"><span class="pre">paths</span></code>
+is the list in the <code class="docutils literal notranslate"><span class="pre">&quot;paths&quot;</span></code> key.</p>
+</aside>
+<aside class="footnote brackets" id="id7" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>There are currently no plans to normalize the types to lowercase only,
+meaning that types with mixed cases are still not possible, although…
+I’m not sure if they are wanted?  All types are currently lower case
+joined with underscores (not hyphens due to <code class="docutils literal notranslate"><span class="pre">type-format</span></code>), so I guess
+we won’t normalize the case for now…)</p>
+</aside>
+<aside class="footnote brackets" id="id8" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>There’s also <code class="docutils literal notranslate"><span class="pre">BINARY_TYPES</span></code>, but that’s never used for inference.
+Any type that is not of text type is automatically considered binary.</p>
+</aside>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../psp/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">psp</span></code> Package</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../contrib.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Contributing</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021–2024, rapidcow :)
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">basicproc</span></code> Module</a><ul>
+<li><a class="reference internal" href="#abstract">Abstract</a></li>
+<li><a class="reference internal" href="#inspection">Inspection</a></li>
+<li><a class="reference internal" href="#backup-file-structure">Backup File Structure</a><ul>
+<li><a class="reference internal" href="#basic-structure">Basic Structure</a></li>
+<li><a class="reference internal" href="#entry-data-and-inheritance">Entry Data and Inheritance</a></li>
+<li><a class="reference internal" href="#insight-and-question">Insight and Question</a></li>
+<li><a class="reference internal" href="#data-model-and-images">Data Model and Images</a></li>
+<li><a class="reference internal" href="#metadata">Metadata</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-program">The Program</a><ul>
+<li><a class="reference internal" href="#top-level-data-extraction">Top-Level Data Extraction</a></li>
+<li><a class="reference internal" href="#rough-idea">Rough Idea</a></li>
+<li><a class="reference internal" href="#the-panel-class">The <code class="docutils literal notranslate"><span class="pre">Panel</span></code> Class</a></li>
+<li><a class="reference internal" href="#the-entry-class">The <code class="docutils literal notranslate"><span class="pre">Entry</span></code> Class</a></li>
+<li><a class="reference internal" href="#inference-rules">Inference Rules</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fun-stuff">Fun Stuff</a><ul>
+<li><a class="reference internal" href="#who-s-the-longest-diary">Who’s the longest diary?</a></li>
+<li><a class="reference internal" href="#extract-entries-written-on-the-same-days">Extract entries written on the same days</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

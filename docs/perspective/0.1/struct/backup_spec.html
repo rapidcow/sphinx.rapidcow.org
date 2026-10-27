@@ -1,0 +1,452 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Data Structure" href="index.html" />
+
+    <meta name="generator" content="sphinx-5.0.0, furo 2022.06.21"/>
+        <title>backup.json Specification - The Perspective Journal documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/stylesheet.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">The Perspective Journal  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">The Perspective Journal  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/about.html">What is this?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/howto.html">How to back up entries from Perspective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/cookbook.html">Perspective Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/extensions.html">Extension Tutorial</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../changelog/index.html">Changelog</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog/0.1.html">Release 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basicproc/zero.html">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">basicproc</span></code> Module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../psp/index.html">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">psp</span></code> Package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../psp/types.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.types</span></code> — Important objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/serializers/json.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.serializers.json</span></code> — JSON backup file processors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/stringify.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.stringify</span></code> — Format panels and entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/cli.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.cli</span></code> — Command-line interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/filetypes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.filetypes</span></code> — Defining file types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/timeutil.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.timeutil</span></code> — Time utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/util.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.util</span></code> — Miscellaneous functions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../psp/ext/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext</span></code> — Extensions that may or may not be so useful to everyone</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../psp/ext/bigentry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext.bigentry</span></code> — Blog-style entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psp/ext/captions.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext.captions</span></code> — Entries with captions and stuff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../psp/ext/metadata.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.ext.metadata</span></code> — Entries with metadata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Data Structure</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">backup.json</span></code> Specification</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="backup-json-specification">
+<span id="backup-spec"></span><h1><code class="docutils literal notranslate"><span class="pre">backup.json</span></code> Specification<a class="headerlink" href="#backup-json-specification" title="Permalink to this heading">#</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rapidcow</p>
+</dd>
+<dt class="field-even">Date<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nov 29, 2021 (still WIP tho)</p>
+</dd>
+</dl>
+<section id="abstract">
+<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this heading">#</a></h2>
+<p>This is meant to provide a technical specification for the minimal
+syntax of <code class="docutils literal notranslate"><span class="pre">backup.json</span></code>, as read and written by
+<a class="reference internal" href="../psp/serializers/json.html#module-psp.serializers.json" title="psp.serializers.json: JSON backup file processors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">psp.serializers.json</span></code></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This isn’t complete at the moment, so please refer to “Backup File
+Structure” section from <a class="reference internal" href="../basicproc/zero.html#basicproc"><span class="std std-ref">The basicproc Module</span></a> for a more detailed explanation!</p>
+</div>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h2>
+<p>Here are some terms that will be used.</p>
+<dl class="simple">
+<dt>attribute</dt><dd><p>An attribute is a pair of name and value, similar to key and value of a
+Python <em>dict</em>.  For example the <code class="docutils literal notranslate"><span class="pre">tz</span></code> attribute (or more verbosely, the
+value of the attribute with the name <code class="docutils literal notranslate"><span class="pre">tz</span></code>) is a string and the <code class="docutils literal notranslate"><span class="pre">data</span></code>
+attribute of entries may be a <em>str</em> or <em>bool</em>.  To make it consistent
+I will use code literals for attribute names (like <code class="docutils literal notranslate"><span class="pre">tz</span></code> and <code class="docutils literal notranslate"><span class="pre">data</span></code>)
+and italic for variables types (like <em>dict</em> and <em>str</em>) and names (like
+<em>panels</em> and <em>entries</em>).</p>
+</dd>
+<dt>field</dt><dd><p>Another name for attribute (sometimes).</p>
+</dd>
+<dt><em>dict</em>, <em>list</em>, <em>str</em>, <em>bool</em>, null</dt><dd><p>These will be convenient Pythonic terms to refer to JSON objects,
+arrays, strings, and booleans.  They are used mainly because object
+means something different in Python; the use of null, however, is
+preserved, despite in Python it is the singleton <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><em>text</em></dt><dd><p>When an attribute is a <em>text</em> attribute, it must be either a <em>str</em>
+or a <em>list</em> of <em>str</em> (such that <code class="docutils literal notranslate"><span class="pre">''.join()</span></code> can create a string from it).</p>
+</dd>
+</dl>
+<p>Other terms such as “panel” and “entry” will be explained progressively
+in the following text.</p>
+</section>
+<section id="top-level-attributes">
+<h2>Top-Level Attributes<a class="headerlink" href="#top-level-attributes" title="Permalink to this heading">#</a></h2>
+<p>A backup file is always a <em>dict</em>, inside which are what we will call the
+<em>top-level attributes</em> and a <em>list</em> of <em>panels</em> stored under the key
+<code class="docutils literal notranslate"><span class="pre">data</span></code>.  Here we will enumerate several keys (all surprisingly optional)
+that you may use.</p>
+<dl>
+<dt>tz (optional)</dt><dd><p>A <em>str</em> representing the time zone for everything in this backup.
+Must be valid when passed to <a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONLoader.parse_timezone" title="psp.serializers.json.JSONLoader.parse_timezone"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JSONLoader.parse_timezone()</span></code></a>.
+This is optional but a time zone must be eventually provided as
+<a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONLoader" title="psp.serializers.json.JSONLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONLoader</span></code></a> parses some time/date time string.</p>
+</dd>
+<dt>paths (optional)</dt><dd><p>A <em>list</em> of <em>str</em> for the lookup paths.  Each time the <code class="docutils literal notranslate"><span class="pre">input</span></code>
+attribute of an <em>entry</em> is parsed, its value is prepended with the
+<code class="docutils literal notranslate"><span class="pre">base_dir</span></code> option of <a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONLoader" title="psp.serializers.json.JSONLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONLoader</span></code></a> and a path in this attribute.</p>
+<p>By default this evaluates to simply <code class="docutils literal notranslate"><span class="pre">['.']</span></code>—that is, the same
+directory as <code class="docutils literal notranslate"><span class="pre">base_dir</span></code>.  If this is not omitted, however, be noted
+that <code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code> will not be automatically added and you have to
+explicitly add it if you want <a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONLoader" title="psp.serializers.json.JSONLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONLoader</span></code></a> to look in the same
+directory as <code class="docutils literal notranslate"><span class="pre">base_dir</span></code>.</p>
+</dd>
+<dt>data (optional)</dt><dd><p>A <em>list</em> of <em>dict</em>, each <em>dict</em> being what is called a <em>panel</em>.  The
+content of each <em>dict</em> is elaborated in the following section.
+An empty list is assumed if this is omitted.</p>
+</dd>
+</dl>
+<p>Any other key is ignored by <a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONLoader" title="psp.serializers.json.JSONLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONLoader</span></code></a>, though there is one key that is
+recommended for you to use.  It is also addressed because <a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONDumper" title="psp.serializers.json.JSONDumper"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONDumper</span></code></a>
+exports it and the <code class="docutils literal notranslate"><span class="pre">psp</span> <span class="pre">synopsis</span></code> command recognizes it.</p>
+<dl class="simple">
+<dt>desc (optional)</dt><dd><p>A <em>text</em> attribute giving a brief description of this backup file.
+This is just a recommendation previously reinforced by
+<a class="reference internal" href="../basicproc/zero.html#module-basicproc" title="basicproc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">basicproc</span></code></a> and, sometimes, other “nonstandard” parts of
+my code.  <a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONLoader" title="psp.serializers.json.JSONLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONLoader</span></code></a> never tries to parse this.</p>
+</dd>
+</dl>
+</section>
+<section id="panels">
+<h2>Panels<a class="headerlink" href="#panels" title="Permalink to this heading">#</a></h2>
+<p>Now for the panels!  A <em>panel</em> is a container of <em>entries</em>, loosely speaking.
+It does cooler stuff than that though, but first let’s talk about the one and
+only <strong>required</strong> attribute:</p>
+<dl class="simple">
+<dt>date</dt><dd><p>A <em>str</em> representing the date of the panel.  Must be valid when
+passed to <a class="reference internal" href="../psp/serializers/json.html#psp.serializers.json.JSONLoader.parse_date" title="psp.serializers.json.JSONLoader.parse_date"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JSONLoader.parse_date()</span></code></a>.</p>
+</dd>
+</dl>
+<p>For providing entries:</p>
+<dl class="simple">
+<dt>entries (optional)</dt><dd><p>A <em>list</em> of <em>dict</em>, each <em>dict</em> being what is called an <em>entry</em>.
+The content of each <em>dict</em> is elaborated in the following section.
+An empty list is assumed if this is omitted.</p>
+</dd>
+</dl>
+<p>There is only one valid optional attribute:</p>
+<dl>
+<dt>rating (optional)</dt><dd><p>A <em>str</em> representing the rating of the panel (can be null).
+The three ratings from Perspective from bad to good are
+represented with the strings <code class="docutils literal notranslate"><span class="pre">&quot;:(&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;:|&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;:)&quot;</span></code>.
+(I did not use numbers because I’m not a nerd &gt;_&gt; (well, not entirely))</p>
+<p>Rating is set to null when omitted.</p>
+<p>Example:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">psp.serializers.json</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">panels</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="s2">"""</span><span class="se">\</span>
+<span class="gp">... </span><span class="s2">{</span>
+<span class="gp">... </span><span class="s2">  "data": [</span>
+<span class="gp">... </span><span class="s2">    {</span>
+<span class="gp">... </span><span class="s2">      "date": "2021-04-29",</span>
+<span class="gp">... </span><span class="s2">      "rating": ":)"</span>
+<span class="gp">... </span><span class="s2">    },</span>
+<span class="gp">... </span><span class="s2">    {</span>
+<span class="gp">... </span><span class="s2">      "date": "2021-12-25",</span>
+<span class="gp">... </span><span class="s2">      "rating": null</span>
+<span class="gp">... </span><span class="s2">    },</span>
+<span class="gp">... </span><span class="s2">    {</span>
+<span class="gp">... </span><span class="s2">      "date": "2022-06-01"</span>
+<span class="gp">... </span><span class="s2">    }</span>
+<span class="gp">... </span><span class="s2">  ]</span>
+<span class="gp">... </span><span class="s2">}</span>
+<span class="gp">... </span><span class="s2">"""</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">panel</span> <span class="ow">in</span> <span class="n">panels</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">rating</span> <span class="o">=</span> <span class="n">panel</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">'rating'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">{!r:27}</span><span class="s1">  </span><span class="si">{!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">rating</span><span class="p">))</span>
+<span class="go">datetime.date(2021, 4, 29)   ':)'</span>
+<span class="go">datetime.date(2021, 12, 25)  None</span>
+<span class="go">datetime.date(2022, 6, 1)    None</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="entries">
+<h2>Entries<a class="headerlink" href="#entries" title="Permalink to this heading">#</a></h2>
+<p>Now for the entries… this can get tricky since this is where most of the
+things take place.</p>
+</section>
+<section id="inference">
+<h2>Inference<a class="headerlink" href="#inference" title="Permalink to this heading">#</a></h2>
+<p>This will be a reorganized version of the algorithm from
+<a class="reference internal" href="../basicproc/zero.html#basicproc-inference"><span class="std std-ref">basicproc</span></a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Data Structure</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021–2024, rapidcow :)
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">backup.json</span></code> Specification</a><ul>
+<li><a class="reference internal" href="#abstract">Abstract</a></li>
+<li><a class="reference internal" href="#terminology">Terminology</a></li>
+<li><a class="reference internal" href="#top-level-attributes">Top-Level Attributes</a></li>
+<li><a class="reference internal" href="#panels">Panels</a></li>
+<li><a class="reference internal" href="#entries">Entries</a></li>
+<li><a class="reference internal" href="#inference">Inference</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>
